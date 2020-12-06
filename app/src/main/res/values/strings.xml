@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">GreenLight watch face</string>
+    <string name="greenlight">GreenLight</string>
+    <string name="digital_config_name">GreenLight Config</string>
+
+    <string name="settings_data_title">Data</string>
+    <string name="settings_background_title">Background</string>
+    <string name="settings_24_hour_mode">24-hour time</string>
+    <string name="settings_seconds">Show seconds</string>
+    <string name="settings_notification_indicator">Notification indicator</string>
+    <string name="greenlight_watchface_background">GreenLight Watchface Background</string>
+    <string name="greenlight_top_complication">GreenLight Top Complication</string>
+    <string name="greenlight_bottom_complication">GreenLight Bottom Complication</string>
+
+</resources>

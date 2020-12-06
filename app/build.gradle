@@ -1,0 +1,47 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-android-extensions'
+}
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.2"
+
+    defaultConfig {
+        applicationId "com.inderdhir.watchfaces.greenlight"
+        minSdkVersion 28
+        targetSdkVersion 30
+        versionCode 6
+        versionName "1.3"
+    }
+
+    applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            def buildType = variant.buildType.name == 'release' ? '' : '-' + variant.buildType.name
+            output.outputFileName = output.outputFileName.replace(".apk", "greenlight${buildType}-${variant.versionName}.apk")
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation 'com.google.android.support:wearable:2.8.1'
+    implementation 'com.google.android.gms:play-services-wearable:17.0.0'
+    compileOnly 'com.google.android.wearable:wearable:2.8.1'
+    implementation 'androidx.core:core-ktx:1.3.2'
+    implementation 'androidx.percentlayout:percentlayout:1.0.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation 'androidx.palette:palette-ktx:1.0.0'
+    implementation 'androidx.preference:preference-ktx:1.1.1'
+    implementation 'androidx.wear:wear:1.1.0'
+    implementation 'com.google.android.gms:play-services-base:17.5.0'
+}
