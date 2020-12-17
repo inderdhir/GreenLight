@@ -12,7 +12,7 @@ android {
         applicationId "com.inderdhir.watchfaces.greenlight"
         minSdkVersion 28
         targetSdkVersion 30
-        versionCode 6
+        versionCode 7
         versionName "1.3"
     }
 
