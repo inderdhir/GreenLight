@@ -1,35 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merge xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-            xmlns:tools="http://schemas.android.com/tools"
-    >
-
-    <ImageView
-        android:id="@+id/background_watchface_view"
+<layout>
+    <merge xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:contentDescription="@string/greenlight_watchface_background"
-        tools:src="@drawable/preview_digital_circular" />
+        xmlns:tools="http://schemas.android.com/tools"
+        >
 
-    <ImageView
-        android:id="@+id/top_complication"
-        android:layout_width="@dimen/settings_complication_width_height"
-        android:layout_height="@dimen/settings_complication_width_height"
-        android:layout_margin="@dimen/settings_complication_margin"
-        android:scaleType="fitXY"
-        android:layout_gravity="center_horizontal"
-        android:src="@android:drawable/ic_menu_add"
-        android:contentDescription="@string/greenlight_top_complication"/>
+        <ImageView
+            android:id="@+id/background_watchface_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/greenlight_watchface_background"
+            tools:src="@drawable/preview_digital_circular" />
 
-    <ImageView
-        android:id="@+id/bottom_complication"
-        android:layout_width="@dimen/settings_complication_width_height"
-        android:layout_height="@dimen/settings_complication_width_height"
-        android:layout_margin="@dimen/settings_complication_margin"
-        android:layout_gravity="bottom|center_horizontal"
-        android:src="@android:drawable/ic_menu_add"
-        android:contentDescription="@string/greenlight_bottom_complication"/>
+        <ImageView
+            android:id="@+id/top_complication"
+            android:layout_width="@dimen/settings_complication_width_height"
+            android:layout_height="@dimen/settings_complication_width_height"
+            android:layout_margin="@dimen/settings_complication_margin"
+            android:scaleType="fitXY"
+            android:layout_gravity="center_horizontal"
+            android:src="@android:drawable/ic_menu_add"
+            android:contentDescription="@string/greenlight_top_complication"/>
 
-</merge>
+        <ImageView
+            android:id="@+id/bottom_complication"
+            android:layout_width="@dimen/settings_complication_width_height"
+            android:layout_height="@dimen/settings_complication_width_height"
+            android:layout_margin="@dimen/settings_complication_margin"
+            android:layout_gravity="bottom|center_horizontal"
+            android:src="@android:drawable/ic_menu_add"
+            android:contentDescription="@string/greenlight_bottom_complication"/>
+
+    </merge>
+</layout>

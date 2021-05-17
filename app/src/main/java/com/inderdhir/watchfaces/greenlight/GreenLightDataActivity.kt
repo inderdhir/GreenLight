@@ -6,7 +6,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.wearable.complications.*
 import android.view.View
-import kotlinx.android.synthetic.main.activity_data.*
+import com.inderdhir.watchfaces.greenlight.databinding.ActivityDataBinding
 import java.util.concurrent.Executors
 
 
@@ -16,17 +16,18 @@ import java.util.concurrent.Executors
 
 class GreenLightDataActivity : Activity(), View.OnClickListener {
 
+    private lateinit var binding: ActivityDataBinding
     private val complicationConfigRequestCode = 42
     private var currentSelectedComplicationId = -1
     private var providerInfoRetriever: ProviderInfoRetriever? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_data)
+        setContentView(ActivityDataBinding.inflate(layoutInflater).root)
 
-        top_complication.setOnClickListener(this)
-        bottom_complication.setOnClickListener(this)
-        background_watchface_view.setImageResource(
+        binding.topComplication.setOnClickListener(this)
+        binding.bottomComplication.setOnClickListener(this)
+        binding.backgroundWatchfaceView.setImageResource(
                 if(resources.configuration.isScreenRound)
                     R.drawable.preview_digital_circular else R.drawable.preview_digital
         )
@@ -36,7 +37,7 @@ class GreenLightDataActivity : Activity(), View.OnClickListener {
 
     override fun onClick(p0: View?) {
         currentSelectedComplicationId =
-                if(top_complication == p0) TOP_COMPLICATION_ID
+                if(binding.topComplication == p0) TOP_COMPLICATION_ID
                 else BOTTOM_COMPLICATION_ID
         startActivityForResult(
                 ComplicationHelperActivity.createProviderChooserHelperIntent(
@@ -59,9 +60,9 @@ class GreenLightDataActivity : Activity(), View.OnClickListener {
                     data?.getParcelableExtra<ComplicationProviderInfo>(ProviderChooserIntent.EXTRA_PROVIDER_INFO)
             val selectedView =
                     if (currentSelectedComplicationId == TOP_COMPLICATION_ID) {
-                        top_complication
+                        binding.topComplication
                     } else {
-                        bottom_complication
+                        binding.bottomComplication
                     }
             if(complicationProviderInfo?.providerIcon != null) {
                 selectedView.setImageIcon(complicationProviderInfo.providerIcon)
@@ -87,7 +88,7 @@ class GreenLightDataActivity : Activity(), View.OnClickListener {
                                 complicationProviderInfo: ComplicationProviderInfo?) {
                             val selectedView =
                                     if (watchFaceComplicationId == TOP_COMPLICATION_ID)
-                                        top_complication else bottom_complication
+                                        binding.topComplication else binding.bottomComplication
                             complicationProviderInfo?.providerIcon?.let { selectedView.setImageIcon(it) }
                         }
                     },
