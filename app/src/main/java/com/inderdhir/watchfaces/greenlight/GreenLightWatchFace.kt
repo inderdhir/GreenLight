@@ -134,12 +134,8 @@ class GreenLightWatchFace : CanvasWatchFaceService() {
             super.onApplyWindowInsets(insets)
 
             bottomInset =
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
-                    insets?.getInsets(WindowInsets.Type.systemBars())?.bottom
-                } else {
-                    @Suppress("DEPRECATION")
-                    insets?.systemWindowInsetBottom
-                } ?: 0
+                insets?.getInsets(WindowInsets.Type.systemBars())?.bottom
+                    ?: 0
         }
 
         override fun onPropertiesChanged(properties: Bundle) {
@@ -394,7 +390,7 @@ class GreenLightWatchFace : CanvasWatchFaceService() {
                 } else if (topComplicationData?.type == ComplicationData.TYPE_NO_PERMISSION) {
                     PendingIntent.getActivity(baseContext, noPermissionRequestCode,
                         ComplicationHelperActivity.createPermissionRequestHelperIntent(
-                            baseContext, componentName), PendingIntent.FLAG_UPDATE_CURRENT)
+                            baseContext, componentName), PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
                 }
                 else {
                     topComplicationData?.tapAction?.send()
@@ -407,7 +403,7 @@ class GreenLightWatchFace : CanvasWatchFaceService() {
                 } else if (bottomComplicationData?.type == ComplicationData.TYPE_NO_PERMISSION) {
                     PendingIntent.getActivity(baseContext, noPermissionRequestCode,
                         ComplicationHelperActivity.createPermissionRequestHelperIntent(
-                            baseContext, componentName), PendingIntent.FLAG_UPDATE_CURRENT)
+                            baseContext, componentName),  PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
                 } else {
                     bottomComplicationData?.tapAction?.send()
                 }
@@ -536,19 +532,17 @@ class GreenLightWatchFace : CanvasWatchFaceService() {
             canvas.restore()
         }
 
-        private fun isComplicationEnabled(complicationData: ComplicationData?): Boolean {
-            return complicationData != null &&
+        private fun isComplicationEnabled(complicationData: ComplicationData?): Boolean =
+            complicationData != null &&
                     complicationData.type != ComplicationData.TYPE_NO_PERMISSION
                     && complicationData.type != ComplicationData.TYPE_NOT_CONFIGURED
                     && complicationData.type != ComplicationData.TYPE_EMPTY
-        }
 
-        private fun launchProviderChooser(complicationId: Int) {
+        private fun launchProviderChooser(complicationId: Int) =
             baseContext.startActivity(ComplicationHelperActivity.createProviderChooserHelperIntent(
                 baseContext, componentName, complicationId, ComplicationData.TYPE_LONG_TEXT,
                 ComplicationData.TYPE_RANGED_VALUE, ComplicationData.TYPE_SHORT_TEXT,
                 ComplicationData.TYPE_SMALL_IMAGE, ComplicationData.TYPE_ICON))
-        }
 
         /**
          * Handle updating the time periodically in interactive mode.

@@ -20,7 +20,9 @@ class GreenLightSettingsFragment : PreferenceFragmentCompat() {
     private val requestCode = 42
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-        preferenceScreen = preferenceManager.createPreferenceScreen(context)
+        context?.let {
+            preferenceScreen = preferenceManager.createPreferenceScreen(it)
+        }
         addDataPreference()
         addLargeImageBackgroundPreference()
         add24HourPreference()

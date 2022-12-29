@@ -2,16 +2,17 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.inderdhir.watchfaces.greenlight">
 
+    <!-- Required to act as a custom watch face. -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <uses-permission android:name="com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA" />
+
     <!-- Required for complications to receive complication data and open the provider chooser. -->
     <uses-feature android:name="android.hardware.type.watch" />
 
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="com.google.android.wearable.permission.RECEIVE_COMPLICATION_DATA" />
-
     <!-- Required to act as a custom watch face. -->
     <application
-        android:allowBackup="false"
-        android:directBootAware="true"
+        android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
@@ -26,6 +27,7 @@
 
         <service
             android:name=".GreenLightWatchFace"
+            android:exported="true"
             android:label="@string/greenlight"
             android:permission="android.permission.BIND_WALLPAPER">
             <intent-filter>
@@ -65,7 +67,8 @@
 
         <activity
             android:name=".GreenLightSettingsActivity"
-            android:label="@string/digital_config_name">
+            android:label="@string/digital_config_name"
+            android:exported="true">
             <intent-filter>
                 <action android:name=
                     "com.example.android.wearable.watchface.CONFIG_DIGITAL" />
